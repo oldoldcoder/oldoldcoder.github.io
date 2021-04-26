@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>感想：关于整数安全漏洞 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言：关于整数安全漏洞的一点点小小的整理。我自己随便写了，写到那里就是那里吧，东西也是写给我自己看的。 1.为什么会产生整数安全漏洞整数安全的三种类型：  溢出：有符号数才会产生溢出，当两正和两符相加的时候，会有可能导致溢出，溢出的数据会覆盖掉符号位，从而是两个很大的正数相加变成负数，两个很大的负数相变成正数，溢出标志位of可以检测是否有溢出产生。另外溢出分为上溢出和下溢出。 回绕：回绕">
+  <meta name="description" content="前言：关于整数安全漏洞的一点点小小的整理。我自己随便写了，写到那里就是那里吧，东西也是写给我自己看的。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="感想：关于整数安全漏洞">
 <meta property="og:url" content="http://example.com/2021/04/26/%E6%84%9F%E6%83%B3%EF%BC%9A%E5%85%B3%E4%BA%8E%E6%95%B4%E6%95%B0%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前言：关于整数安全漏洞的一点点小小的整理。我自己随便写了，写到那里就是那里吧，东西也是写给我自己看的。 1.为什么会产生整数安全漏洞整数安全的三种类型：  溢出：有符号数才会产生溢出，当两正和两符相加的时候，会有可能导致溢出，溢出的数据会覆盖掉符号位，从而是两个很大的正数相加变成负数，两个很大的负数相变成正数，溢出标志位of可以检测是否有溢出产生。另外溢出分为上溢出和下溢出。 回绕：回绕">
+<meta property="og:description" content="前言：关于整数安全漏洞的一点点小小的整理。我自己随便写了，写到那里就是那里吧，东西也是写给我自己看的。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210420212027379.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210420212356143.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210420212605821.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70">
 <meta property="article:published_time" content="2021-04-26T12:08:03.179Z">
-<meta property="article:modified_time" content="2021-04-26T12:16:02.429Z">
+<meta property="article:modified_time" content="2021-04-26T12:32:20.132Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210420212027379.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70">
@@ -178,12 +178,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <span id="more"></span>
+      
+      
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=362998&auto=0&height=66"></iframe>
 
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=362998&auto=0&height=66"></iframe>
+
+<h4 id="前言：关于整数安全漏洞的一点点小小的整理。"><a href="#前言：关于整数安全漏洞的一点点小小的整理。" class="headerlink" title="前言：关于整数安全漏洞的一点点小小的整理。"></a>前言：关于整数安全漏洞的一点点小小的整理。</h4><h6 id="我自己随便写了，写到那里就是那里吧，东西也是写给我自己看的。"><a href="#我自己随便写了，写到那里就是那里吧，东西也是写给我自己看的。" class="headerlink" title="我自己随便写了，写到那里就是那里吧，东西也是写给我自己看的。"></a>我自己随便写了，写到那里就是那里吧，东西也是写给我自己看的。</h6><span id="more"></span>
 
 
-<h4 id="前言：关于整数安全漏洞的一点点小小的整理。"><a href="#前言：关于整数安全漏洞的一点点小小的整理。" class="headerlink" title="前言：关于整数安全漏洞的一点点小小的整理。"></a>前言：关于整数安全漏洞的一点点小小的整理。</h4><h6 id="我自己随便写了，写到那里就是那里吧，东西也是写给我自己看的。"><a href="#我自己随便写了，写到那里就是那里吧，东西也是写给我自己看的。" class="headerlink" title="我自己随便写了，写到那里就是那里吧，东西也是写给我自己看的。"></a>我自己随便写了，写到那里就是那里吧，东西也是写给我自己看的。</h6><!-- more -->
 <p>1.为什么会产生整数安全漏洞<br>整数安全的三种类型：</p>
 <ul>
 <li>溢出：有符号数才会产生溢出，当两正和两符相加的时候，会有可能导致溢出，溢出的数据会覆盖掉符号位，从而是两个很大的正数相加变成负数，两个很大的负数相变成正数，溢出标志位of可以检测是否有溢出产生。另外溢出分为上溢出和下溢出。</li>
