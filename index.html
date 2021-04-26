@@ -152,6 +152,480 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-感想：关于整数安全漏洞" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/26/%E6%84%9F%E6%83%B3%EF%BC%9A%E5%85%B3%E4%BA%8E%E6%95%B4%E6%95%B0%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/">感想：关于整数安全漏洞</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/26/%E6%84%9F%E6%83%B3%EF%BC%9A%E5%85%B3%E4%BA%8E%E6%95%B4%E6%95%B0%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/" class="archive-article-date">
+  	<time datetime="2021-04-26T12:08:03.179Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=362998&auto=0&height=66"></iframe>
+
+
+<h4 id="前言：关于整数安全漏洞的一点点小小的整理。"><a href="#前言：关于整数安全漏洞的一点点小小的整理。" class="headerlink" title="前言：关于整数安全漏洞的一点点小小的整理。"></a>前言：关于整数安全漏洞的一点点小小的整理。</h4><h6 id="我自己随便写了，写到那里就是那里吧，东西也是写给我自己看的。"><a href="#我自己随便写了，写到那里就是那里吧，东西也是写给我自己看的。" class="headerlink" title="我自己随便写了，写到那里就是那里吧，东西也是写给我自己看的。"></a>我自己随便写了，写到那里就是那里吧，东西也是写给我自己看的。</h6><!-- more -->
+<p>1.为什么会产生整数安全漏洞<br>整数安全的三种类型：</p>
+<ul>
+<li>溢出：有符号数才会产生溢出，当两正和两符相加的时候，会有可能导致溢出，溢出的数据会覆盖掉符号位，从而是两个很大的正数相加变成负数，两个很大的负数相变成正数，溢出标志位of可以检测是否有溢出产生。另外溢出分为上溢出和下溢出。</li>
+<li>回绕：回绕是对于无符号整数的，例如对于一个unsigned char(unsigned int_8)的数据，当你赋值给他256的时候，就会回绕变为0，超过了上限，也是超过了8个bit，进位到9bit，导致存储的数据丢了。</li>
+<li>截断：截断是把一个比较大宽度数存放在宽度比较小的操作数当中，导致高位发生了截断。</li>
+</ul>
+<p>常常产生问题的就有什么呢？就有整数转换，也就是显式和隐式两种把，具体我就不说了，比如你把int类型给char类型。<br>另外还有的就是整数提升，（这个最早听到概念的话是在《c专家编程》上面），也是一种两个宽度不一样的数据操作的时候，会自动的把宽度小的转换成宽度大的，具体的如何我也不知道云云。</p>
+<p>另外还要说一句我一直感觉很有趣的话：</p>
+<blockquote>
+<p>在计算机中的数据，在于你如何解释，你让它是地址，他就是地址，你让他是unsigned就是unsigned，是signed，他就是signed。</p>
+</blockquote>
+<p>下面我稍微的演示一下：<br><img src="https://img-blog.csdnimg.cn/20210420212027379.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>可以看到负数在这里变成了很大很大的数，那我们都知道数据在计算机中是补码形式存储，所以-4在计算机中应该是。<br><img src="https://img-blog.csdnimg.cn/20210420212356143.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>那对于这个32bit的数据计算机这个时候把他当成int类型解读得到的就是-4，那我们再看看按照unsigned解读呢？<br><img src="https://img-blog.csdnimg.cn/20210420212605821.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>我们可以看到得到了我们想要的结果，也就是我们编程得到的结果，所以说负数整数提升变成无符号的整数会变成一个特别大的数据。</p>
+<p>2.关于利用。<br>常见有size_t形式的参数 函数有：<br>memcpy()；<br>strncpy();<br>3.多的也就不说了，这个漏洞是一个很小的点。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/26/%E6%84%9F%E6%83%B3%EF%BC%9A%E5%85%B3%E4%BA%8E%E6%95%B4%E6%95%B0%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-题目：stack2--xctf--题解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Astack2--xctf--%E9%A2%98%E8%A7%A3/">stack2--xctf的题解</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Astack2--xctf--%E9%A2%98%E8%A7%A3/" class="archive-article-date">
+  	<time datetime="2021-04-26T12:06:45.996Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=362998&auto=0&height=66"></iframe>
+
+<h3 id="—XCTF-4th-QCTF-2018"><a href="#—XCTF-4th-QCTF-2018" class="headerlink" title="—XCTF 4th-QCTF-2018"></a>—XCTF 4th-QCTF-2018</h3><p>前言，怎么说呢，这题目还是把我折磨的可以的，我一开始是没有看到后面的直接狙击的，只能说呢。</p>
+<p><em><strong>我的不经意间的粗心，破坏了你许多的温柔</strong></em></p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Astack2--xctf--%E9%A2%98%E8%A7%A3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-感想：elf文件格式，基于link时" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/26/%E6%84%9F%E6%83%B3%EF%BC%9Aelf%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%EF%BC%8C%E5%9F%BA%E4%BA%8Elink%E6%97%B6/">elf文件格式解析(link status)</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/26/%E6%84%9F%E6%83%B3%EF%BC%9Aelf%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%EF%BC%8C%E5%9F%BA%E4%BA%8Elink%E6%97%B6/" class="archive-article-date">
+  	<time datetime="2021-04-26T12:04:35.297Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=362998&auto=0&height=66"></iframe>
+
+<h4 id="1-ELF概念："><a href="#1-ELF概念：" class="headerlink" title="1.ELF概念："></a>1.ELF概念：</h4><p>ELF（Executable and Linkable Format），即“可执行可链接格式”，最初由UNIX系统实验室作为应用程序二进制接口（Application Binary Interface – ABI）的一部分而制定和发布，是COFF（Common file format）格式的变种。Linux系统上所运行的就是ELF格式的文件，相关定义在“/usr/include/elf.h”文件里。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/26/%E6%84%9F%E6%83%B3%EF%BC%9Aelf%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%EF%BC%8C%E5%9F%BA%E4%BA%8Elink%E6%97%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-题目：forgot题解--攻防世界wpmd" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Aforgot%E9%A2%98%E8%A7%A3--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cwpmd/">forgot题解</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Aforgot%E9%A2%98%E8%A7%A3--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cwpmd/" class="archive-article-date">
+  	<time datetime="2021-04-26T12:02:30.400Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=362998&auto=0&height=66"></iframe>
+
+<h2 id="攻防世界进阶区–forgot"><a href="#攻防世界进阶区–forgot" class="headerlink" title="攻防世界进阶区–forgot"></a>攻防世界进阶区–forgot</h2><p>前言，这题中看不中用啊宝友！！！</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Aforgot%E9%A2%98%E8%A7%A3--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cwpmd/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-题目：dice_game--攻防世界wp" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Adice_game--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cwp/">dice_game的题解</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Adice_game--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cwp/" class="archive-article-date">
+  	<time datetime="2021-04-26T12:00:25.256Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=362998&auto=0&height=66"></iframe>
+
+<h2 id="dice-game"><a href="#dice-game" class="headerlink" title="dice_game"></a>dice_game</h2><p>XCTF 4th-QCTF-2018<br>前言，不得不说，虽然是个简单题但是还是要记录一下，来让自己记住这些东西。<br>考察的知识点是：<br>1.cdll_loadlibrary加载对应库使得Python可以使用c的函数。<br>2.关于srand函数中种子的介绍。<br>3.一些平时没有见过的杂项<br><em>保证我写的很详细，因为我也是个菜鸡</em></p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Adice_game--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cwp/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-题目：pwn200" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Apwn200/">pwn200--攻防世界的题解</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Apwn200/" class="archive-article-date">
+  	<time datetime="2021-04-26T11:59:12.801Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=362998&auto=0&height=66"></iframe>
+
+<h2 id="pwn200"><a href="#pwn200" class="headerlink" title="pwn200"></a>pwn200</h2><p>—XDCTF-2015<br><em>每日一pwn，今天又做了一个pwn，那个pwn呢？？？攻防世界的进阶区里的一道小pwn题，虽然这个题考察的知识不多，rop链也比较好构建，但是还是让我又学到了一些东西，因为害怕忘记，写个博客记录记录。</em></p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Apwn200/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-题目：welpwn题解--攻防世界" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Awelpwn%E9%A2%98%E8%A7%A3--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/">welpwn的题解</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Awelpwn%E9%A2%98%E8%A7%A3--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/" class="archive-article-date">
+  	<time datetime="2021-04-26T11:56:28.842Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=362998&auto=0&height=66"></iframe>
+
+<h2 id="记录一道自己做的ctf题目：welpwn"><a href="#记录一道自己做的ctf题目：welpwn" class="headerlink" title="记录一道自己做的ctf题目：welpwn"></a>记录一道自己做的ctf题目：welpwn</h2><p>前言：冲冲冲！</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Awelpwn%E9%A2%98%E8%A7%A3--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-first" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -172,7 +646,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="a-new-beginning"><a href="#a-new-beginning" class="headerlink" title="a new beginning"></a>a new beginning</h2><hr>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=362998&auto=0&height=66"></iframe>
+
+<h2 id="a-new-beginning"><a href="#a-new-beginning" class="headerlink" title="a new beginning"></a>a new beginning</h2><hr>
 
       
 

